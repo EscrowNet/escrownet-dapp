@@ -7,11 +7,19 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      white: "#ffffff",
+      black: "#000000",
+      purple: "#64537B",
+      midnight: "#2D0561",
+      gray: {
+        light: "#F8F8F8",
+        medium: "#C4C4C4",
+        dark: "#4A4747",
       },
+      orange: "#FBA197",
     },
   },
   plugins: [],
