@@ -1,101 +1,72 @@
 import Image from "next/image";
+import { Header } from "@/app/ui/landing/Header";
+import { Button } from "@/app/ui/landing/button";
+import { TextInput } from "@/app/ui/landing/textinput";
+import { AmountInput } from "@/app/ui/landing/AmountInput";
+import { Select } from "@/app/ui/landing/select";
+import { Footer } from "@/app/ui/landing/Footer";
+
+import Image1 from "@/public/icons/image1.svg";
+import USDT from "@/public/icons/usdt.svg";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className="flex flex-col h-screen">
+      <Header />
+      <main className="flex flex-col items-center pt-20 bg-gray-light h-full gap-6 px-24">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+          src="/images/bg-home.png"
+          alt="bg"
+          fill
+          className="object-contain mt-10"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+        <h1
+          className="text-4xl font-bold text-center text-midnight"
+          style={{ maxWidth: 580 }}
+        >
+          Secure Crypto Transactions Made Simple
+        </h1>
+        <p className="text-center text-purple text-sm">
+          Integrate Escrow Directly Into Your dApps with Our StarkNet SDK
+        </p>
+        <div className="flex items-center justify-center gap-4 z-10">
+          <Button variant="secondary" className="w-40">
+            Download SDK
+          </Button>
+          <Button className="w-40">Launch App</Button>
+        </div>
+        <div
+          className="flex flex-col items-center justify-center gap-4 bg-white rounded-xl mt-4 p-4 z-10"
+          style={{ width: 400 }}
+        >
+          <div className="flex items-end justify-between w-full">
+            <div className="w-full">
+              <p className="text-sm font-semibold">Deposit details</p>
+            </div>
+            <Select
+              options={[{ id: 1, name: "0x1e1...39b2", icon: Image1 }]}
+              defaultValue={{ id: 1, name: "0x1e1...39b2", icon: Image1 }}
+              className="h-8 w-64"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+          <div className="w-full flex items-center justify-between gap-2">
+            <TextInput placeholder="Starknet Address or Stack-ID" />
+            <Select
+              options={[
+                { id: 1, name: "USDT", icon: USDT },
+                { id: 2, name: "USDC", icon: USDT },
+              ]}
+              defaultValue={{ id: 1, name: "USDT", icon: USDT }}
+              className="w-40"
+            />
+          </div>
+          <AmountInput />
+          <button className="flex w-full h-10 mt-4 items-center justify-center rounded-md bg-purple hover:opacity-90 px-3 text-sm font-medium text-white transition-colors aria-disabled:cursor-not-allowed aria-disabled:opacity-50">
+            Escrow Pay
+          </button>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }
