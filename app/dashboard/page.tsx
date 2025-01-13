@@ -1,4 +1,4 @@
-import { Header } from "@/app/ui/dashboard/header";
+import { Header } from "@/app/ui/dashboard/Header";
 import { Hero } from "@/app/ui/dashboard/Hero";
 import { Card } from "@/app/ui/dashboard/card";
 import { TransactionList } from "@/app/ui/dashboard/TransactionList";
