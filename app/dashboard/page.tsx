@@ -1,3 +1,5 @@
+import { Header } from "../ui/dashboard/header";
+
 export default async function Page() {
-  return <main>Dashboard</main>;
+  return <Header />;
 }
