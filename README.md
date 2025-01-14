@@ -1,3 +1,7 @@
+## About the Project
+
+EscrowNet is a dApp and an API for escrow payments on Starknet. The dApp facilitates secure transactions between parties by holding assets in escrow until predefined conditions are met.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
