@@ -1,13 +1,9 @@
 import Image from "next/image";
 import EllipseLeft from "@/public/Ellipse 2.svg";
 import EllipseRight from "@/public/Ellipse 3.svg";
-export default function Banner() {
+export default function banner() {
     return (
-        <div className="flex relative bg-[#64537B] text-white h-auto">
-        {/* <div className="absolute inset-0 flex justify-between items-center pointer-events-none">
-          <div className="w-1/2 h-full bg-pink-400 rounded-full blur-3xl opacity-20"></div>
-          <div className="w-1/2 h-full bg-pink-400 rounded-full blur-3xl opacity-20 rotate-180"></div>
-        </div> */}
+        <div className="flex relative bg-[#64537B] text-white h-auto rounded-[4px]">
         <div>
             <Image
               src={EllipseLeft}
@@ -21,7 +17,7 @@ export default function Banner() {
             Protect your funds and ensure trust in every deal by using escrow.Your money stays safe until all terms are met, giving <br />
             both you and your counterparty peace of mind. Make your first escrow payment today!
           </p>
-          <button className="mt-6 px-6 py-2 bg-[#FAA197] text-white font-medium rounded hover:bg-pink-600 transition">
+          <button className="mt-6 px-6 py-2 bg-[#FAA197] text-white font-medium rounded hover:bg-pink-600 transition rounded-[4px] ">
             Create Transaction
           </button>
         </div>
@@ -29,7 +25,7 @@ export default function Banner() {
             <Image
               src={EllipseRight}
               alt="Escrow Banner"
-              width={155}
+              width={185}
               height={85}
             />
         </div>

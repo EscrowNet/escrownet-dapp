@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Usdt from "../../../public/usdt.png";
+import Usdt from "@/public/usdt.png";
 
-export default function Transactions({ title }: { title: string }) {
+export default function transactionList({ title }: { title: string }) {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <h2 className="font-bold text-lg mb-4">{title}</h2>
