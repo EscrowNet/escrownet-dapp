@@ -5,7 +5,7 @@ import Footer from "./Components/Footer";
 
 export default function Home() {
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-screen bg-[#F5F5F5]">
       <Header/>
       <Hero/>
       <Footer/>
