@@ -17,8 +17,8 @@ const DepositForm: React.FC = () => {
           <select
             className="text-gray-700 bg-gray-300 focus:outline-none flex-1"
           >
-            <option value="usdt">USDT</option>
-            <option value="eth">ETH</option>
+            <option value="usdt">0x1e13....39b2</option>
+            <option value="eth">0x01g24....0d73</option>
           </select>
         </div>
         </div>
