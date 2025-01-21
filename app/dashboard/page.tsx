@@ -1,9 +1,12 @@
-export default function Dashboard() {
+import React from "react";
+import Dashboard from "../Components/dashboard-component/page";
+
+const page = () => {
     return (
-      <div className="p-6">
-        <div className="mb-8">
-          <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+        <div>
+            <Dashboard />
         </div>
-      </div>
     );
-  }
+};
+
+export default page;
