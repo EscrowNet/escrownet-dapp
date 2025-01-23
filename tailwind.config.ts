@@ -7,13 +7,18 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ["Manrope", "sans-serif"],
+      inter: ["Inter", "sans-serif"],
+    },
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primaryColor: "#2D0561",
       },
       backgroundImage: {
-        'hero-bg': "url('../public/bg.png')", 
+        "hero-bg": "url('/bg.png')",
       },
     },
   },

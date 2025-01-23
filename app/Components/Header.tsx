@@ -1,30 +1,31 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import Logo from "../svg/Logo";
+import { useRouter } from "next/navigation";
 
-const Header: React.FC = () => {
-  const [menuOpen, setMenuOpen] = useState(false); 
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   return (
-    <header className="flex justify-between items-center py-4 px-8 bg-[#F5F5F5] ">
-      <div className="flex items-center space-x-8">
-     
+    <header className="flex justify-between items-center py-4 md:py-6 px-6 lg:px-[120px] bg-transparent text-[#64537B]">
+      <div className="flex items-center gap-x-[22px]">
         <Link href="/">
-          <div className="text-lg font-bold text-[#64537B] cursor-pointer">
-            @escrownet
-          </div>
+          <span className="text-[#64537B]">
+            <Logo />
+          </span>
         </Link>
 
-     
-        <nav className="hidden md:block">
-          <ul className="flex space-x-8 text-lg text-gray-700">
-            <li className="hover:text-gray-500 cursor-pointer">
+        <nav className="hidden md:flex">
+          <ul className="flex gap-x-6 text-base leading-6 font-semibold">
+            <li>
               <Link href="/">Escrow</Link>
             </li>
-            <li className="hover:text-gray-500 cursor-pointer">
+            <li>
               <Link href="/explore">Explore</Link>
             </li>
-            <li className="hover:text-gray-500 cursor-pointer">
+            <li>
               <Link href="/api">API</Link>
             </li>
           </ul>
@@ -32,7 +33,7 @@ const Header: React.FC = () => {
       </div>
       <button
         className="block md:hidden text-gray-700 focus:outline-none"
-        onClick={() => setMenuOpen(!menuOpen)} 
+        onClick={() => setMenuOpen(!menuOpen)}
       >
         <svg
           className="w-6 h-6"
@@ -45,7 +46,7 @@ const Header: React.FC = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
-            d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
+            d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
           />
         </svg>
       </button>
@@ -73,12 +74,12 @@ const Header: React.FC = () => {
         </ul>
       </nav>
 
-      {/* Launch App Button */}
-      <Link href="/launch">
-        <button className="hidden md:block bg-[#2D0561] text-white px-6 py-2 rounded-md hover:bg-gray-300">
-          Launch App
-        </button>
-      </Link>
+      <button
+        className="hidden md:block bg-primaryColor text-white px-[46px] py-3 lg:py-[14px] rounded hover:bg-[#64537B] transition-all duration-300 ease-in-out text-base leading-[25px]"
+        onClick={() => router.push("/launch")}
+      >
+        Launch App
+      </button>
     </header>
   );
 };
