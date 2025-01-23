@@ -23,7 +23,7 @@ const Hero = () => {
 
       <img
         src="/escrow-illus.svg"
-        className="mt-6 md:mt-[56px] w-[70%]"
+        className="mt-6 md:mt-[56px] w-[250px] md:w-[470px]"
         alt=""
       />
     </section>
