@@ -21,7 +21,7 @@ export default function DashboardContentContainer({
         <p className="font-semibold text-base">{title}</p>
         <p className="text-[#958f8f] text-base font-normal">{subTitle}</p>
       </div>
-      <div className="w-full h-[0.5px] bg-[#C4C4C4] my-8" />
+      <div className="w-full h-[0.5px] bg-[#C4C4C4] my-4" />
       {!subTitle && (
         <div className="w-full flex flex-col gap-y-5">{children}</div>
       )}
