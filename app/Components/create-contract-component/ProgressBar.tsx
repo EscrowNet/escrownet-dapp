@@ -14,7 +14,10 @@ export default function ProgressBar({
   const progressEls = items.map((item, i) => {
     return (
       <>
-        <div className="size-8 relative text-sm lg:text-base leading-[16.39px] text-[#958F8F] text-center">
+        <div
+          key={item.name}
+          className="size-8 relative text-sm lg:text-base leading-[16.39px] text-[#958F8F] text-center"
+        >
           <Image
             className={`size-8`}
             alt={item.name}
