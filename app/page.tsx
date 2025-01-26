@@ -1,6 +1,7 @@
 import Header from "./Components/Header";
 import Hero from "./Components/Hero";
 import Footer from "./Components/Footer";
+import ModalWorkflow from "./Components/modal-component/modal-workflow/Workflow";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Header />
       <Hero />
       <Footer />
+      <ModalWorkflow />
     </div>
   );
 }
