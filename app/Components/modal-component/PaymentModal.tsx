@@ -91,7 +91,7 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
             </div>
           </div>
 
-          {/* Horizontal line */}
+         
           <div className="w-16 -ml-4  h-px bg-[#2D0561]"></div>
 
           {/* Condition */}
@@ -106,7 +106,6 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
             </div>
           </div>
 
-          {/* Horizontal line */}
           <div className="w-16 -ml-4  h-px bg-gray-300"></div>
 
           {/* Payment */}
@@ -121,7 +120,7 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
               </div>
             </div>
           </div>
-          {/* Horizontal line */}
+       
           <div className="w-16 h-px bg-gray-300"></div>
 
           {/* Preview */}
@@ -193,9 +192,9 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
             >
               Payment Amount
             </label>
-            {/* Input Box */}
+          
             <div className="relative mt-2">
-              {/* Image Inside Input */}
+            
 
               <input
                 id="payment-amount"
@@ -207,11 +206,11 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
               />
               <div className="absolute inset-y-0 right-2 flex items-center pl-3">
                 <Image
-                  src={usdc} // Replace with your image path
+                  src={usdc} 
                   alt="Payment Icon"
                   width={20}
                   height={20}
-                  className="pointer-events-none" // Prevent interaction with the image
+                  className="pointer-events-none" 
                 />
               </div>
             </div>

@@ -51,7 +51,6 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
             </div>
           </div>
 
-          {/* Horizontal line */}
           <div className="-ml-5 w-20 h-px bg-[#2D0561]"></div>
 
           {/* Condition */}
@@ -66,7 +65,7 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
             </div>
           </div>
 
-          {/* Horizontal line */}
+        
           <div className="-ml-4 w-16 h-px bg-gray-300"></div>
 
           {/* Payment */}
@@ -81,7 +80,7 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
               </div>
             </div>
           </div>
-          {/* Horizontal line */}
+       
           <div className="w-16 h-px bg-gray-300"></div>
 
           {/* Preview */}
@@ -97,12 +96,9 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
         </div>
 
         {/* Form */}
-
-        <div className="p-6 space-y-2">
-          {/* Release condition */}
+         <div className="p-6 space-y-2">
           <div className="mb-6">
             {" "}
-            {/* Added mb-6 for extra spacing */}
             <label
               htmlFor="release-condition"
               className="block text-sm font-[500] text-gray-700"
@@ -135,7 +131,7 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
                       <div className="flex w-full justify-between items-center">
                         <span className="font-medium">{milestone.title}</span>
 
-                        {/* Dot - Only show if the milestone is selected */}
+                        
                         {selectedMilestone === milestone.title && (
                           <div className="flex">
                             <div className="w-6 h-6 flex items-center justify-center border-2 border-[#2D0561] rounded-full">

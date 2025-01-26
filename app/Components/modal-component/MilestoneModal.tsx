@@ -67,7 +67,6 @@ const MilestoneModal: React.FC<ModalProps> = ({ onNext }) => {
             </div>
           </div>
 
-          {/* Horizontal line */}
           <div className="w-16 h-px bg-gray-300"></div>
 
           {/* Condition */}
@@ -81,7 +80,6 @@ const MilestoneModal: React.FC<ModalProps> = ({ onNext }) => {
             </div>
           </div>
 
-          {/* Horizontal line */}
           <div className="w-16 h-px bg-gray-300"></div>
 
           {/* Payment */}
@@ -95,7 +93,6 @@ const MilestoneModal: React.FC<ModalProps> = ({ onNext }) => {
             </div>
           </div>
 
-          {/* Horizontal line */}
           <div className="w-16 h-px bg-gray-300"></div>
 
           {/* Preview */}
@@ -112,7 +109,6 @@ const MilestoneModal: React.FC<ModalProps> = ({ onNext }) => {
 
         {/* Form */}
         <div className="p-6 space-y-6">
-          {/* Title of Contract */}
           <div>
             <label
               htmlFor="contract-title"
@@ -168,8 +164,6 @@ const MilestoneModal: React.FC<ModalProps> = ({ onNext }) => {
                           <span className=" text-gray-500 text-[12px] flex-1">
                             {milestone.description}
                           </span>
-
-                          {/* Dot - Only show if the milestone is selected */}
                           {selectedMilestone === milestone.title && (
                             <div className="w-6 h-6 flex items-center justify-center border-2 border-[#2D0561] rounded-full">
                               <div className="w-2 h-2 bg-[#2D0561] rounded-full"></div>
