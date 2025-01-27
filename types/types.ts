@@ -20,4 +20,5 @@ export interface ContractInterface {
     date: string;
     message: string;
     type : "info" | "action";
+    id ?: number;
   }

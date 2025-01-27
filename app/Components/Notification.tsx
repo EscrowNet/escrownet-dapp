@@ -1,13 +1,15 @@
 import { NotificationInterface } from "@/types/types";
 import { BellIcon } from "../svg/BellIcon";
 import { WalletIcon } from "../svg/Wallet";
+import { useRouter } from "next/navigation";
 
 export const NotificationItem: React.FC<NotificationInterface> = ({
   title,
   message,
   type,
-  date,
+  id
 }) => {
+  const router = useRouter();
   return (
     <div className="flex gap-[0.5rem] rounded-[0.5rem] bg-[#F7F5F9] w-full pt-[0.5rem] pr-[1rem] pl-[1rem] pb-[0.88rem]
     ">
@@ -36,7 +38,9 @@ export const NotificationItem: React.FC<NotificationInterface> = ({
         </p>
 
         {type === "action" && (
-          <button className="btn bg-primaryColor font-sans font-[500] text-white text-[0.65rem] leading-[1.01rem] w-[7.32425rem] h-[2.11588rem] mt-[0.5rem]">
+          <button className="btn bg-primaryColor font-sans font-[500] text-white text-[0.65rem] leading-[1.01rem] w-[7.32425rem] h-[2.11588rem] mt-[0.5rem]"
+          onClick={() => router.push(`/escrow/${id}`)}
+          >
             Review and Sign
           </button>
         )}

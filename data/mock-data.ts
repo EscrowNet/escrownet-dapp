@@ -64,7 +64,7 @@ export const notifications: NotificationInterface[] = [
   },
 
   {
-    title: "Payments Recieved in Escrow",
+    title: "Payments Received in Escrow",
     date: "Jan 20, 2021",
     message: "New Escrow created by Mstone",
     type: "info",

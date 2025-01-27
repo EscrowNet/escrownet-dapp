@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { NotificationItem } from "./Notification";
 import { NotificationInterface } from "@/types/types";
 import { notifications } from "@/data/mock-data";
+import ClickOutsideWrapper from "./outsideClick";
 
 export default function dashboardHeader() {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -24,7 +25,7 @@ export default function dashboardHeader() {
         className="border border-gray-300 rounded-lg p-2 w-1/3 rounded-[4px] "
       />
       <div
-        className="relative cursor-pointer"
+        className="relative cursor-pointer bell"
         onClick={() => setShowNotifications(!showNotifications)}
       >
         {!markAllAsRead && (
@@ -44,9 +45,9 @@ export default function dashboardHeader() {
       <div className="bg-primaryColor text-[#ffffff] font-bold py-2 px-4 rounded-[4px] ">
         0xB7A93...XMASH
       </div>
-
       {showNotifications && (
-        <div className="absolute bg-white top-[100%] right-[1rem] pl-4 pr-4 pt-4 pb-2 rounded bg-white w-[30%] z-10 shadow-lg">
+        <ClickOutsideWrapper onClickOutside={() => setShowNotifications(false)} className="absolute bg-white top-[100%] right-[1rem] pl-4 pr-4 pt-4 pb-2 rounded bg-white w-[30%] z-10 shadow-lg">
+        
           <div className="flex items-center justify-between pb-2  border-b-2 border-[#C4C4C4]">
             <p className="text-center font-sans text-[0.875rem] font-medium leading-[1.5625rem] text-[rgba(58,58,58,0.70)]">
               Notifications
@@ -78,10 +79,15 @@ export default function dashboardHeader() {
           </div>
           <div className="flex flex-col gap-[1rem] pt-2 pb-6 relative h-[50vh] overflow-y-auto">
             {allNotifications?.map((notification, index) => (
-              <NotificationItem key={index} {...notification} />
+              <NotificationItem
+                key={index}
+                {...notification}
+                id={notification.id ? notification.id : index}
+              />
             ))}
           </div>
-        </div>
+        
+        </ClickOutsideWrapper>
       )}
     </header>
   );
