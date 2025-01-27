@@ -1,4 +1,8 @@
-import { ContractInterface, TransactionInterface } from "../types/types";
+import {
+  ContractInterface,
+  NotificationInterface,
+  TransactionInterface,
+} from "../types/types";
 
 export const contracts: ContractInterface[] = [
   {
@@ -40,5 +44,29 @@ export const transactions: TransactionInterface[] = [
     date: "Jan 20, 2021",
     amount: 100,
     recieved: false,
+  },
+];
+
+export const notifications: NotificationInterface[] = [
+  {
+    title: "Sign the Escrow Contract (Mstone)",
+    date: "Jan 20, 2021",
+    message:
+      "The escrow terms are ready for your approval. Please review and sign the contract to proceed.",
+    type: "action",
+  },
+  {
+    title: "New Escrow",
+    date: "Jan 20, 2021",
+    message:
+      "You’ve successfully deposited $2,500 into the escrow account for Milestone 1: ‘Initial Deposit.’ The funds are now securely held in escrow.",
+    type: "info",
+  },
+
+  {
+    title: "Payments Recieved in Escrow",
+    date: "Jan 20, 2021",
+    message: "New Escrow created by Mstone",
+    type: "info",
   },
 ];

@@ -15,3 +15,9 @@ export interface ContractInterface {
     recieved: boolean;
   }
   
+  export interface NotificationInterface {
+    title: string;
+    date: string;
+    message: string;
+    type : "info" | "action";
+  }
