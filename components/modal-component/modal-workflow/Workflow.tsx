@@ -10,7 +10,10 @@ interface ModalProps {
   onPrevious?: () => void;
 }
 
-const ModalWorkflow: React.FC = () => {
+interface IModalWorkflow {
+  closeModal: () => void;
+}
+const ModalWorkflow: React.FC<IModalWorkflow> = ({ closeModal }) => {
   const [currentStep, setCurrentStep] = useState<
     "milestone" | "condition" | "payment"
   >("milestone");
@@ -34,7 +37,10 @@ const ModalWorkflow: React.FC = () => {
   return (
     <>
       {currentStep === "milestone" && (
-        <MilestoneModal onNext={handleNextFromMilestone} />
+        <MilestoneModal
+          onNext={handleNextFromMilestone}
+          closeModal={closeModal}
+        />
       )}
       {currentStep === "condition" && (
         <ConditionModal
@@ -45,8 +51,7 @@ const ModalWorkflow: React.FC = () => {
       {currentStep === "payment" && (
         <PaymentModal
           onPrevious={handlePreviousFromPayment}
-          onNext={() => {
-          }}
+          onNext={() => {}}
         />
       )}
     </>

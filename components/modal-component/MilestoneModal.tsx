@@ -3,13 +3,15 @@
 import React, { useState } from "react";
 import { GoDash } from "react-icons/go";
 import DatePicker from "./ui/Datepicker";
+import { FaXmark } from "react-icons/fa6";
 
 interface ModalProps {
   onNext?: () => void;
   onPrevious?: () => void;
+  closeModal : () => void;
 }
 
-const MilestoneModal: React.FC<ModalProps> = ({ onNext }) => {
+const MilestoneModal: React.FC<ModalProps> = ({ onNext, closeModal }) => {
   const [selectedMilestone, setSelectedMilestone] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -43,10 +45,13 @@ const MilestoneModal: React.FC<ModalProps> = ({ onNext }) => {
   };
 
   return (
-    <div className="fixed inset-0 mb-16 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed left-1/2 top-1/2 h-screen w-screen -ml-[50vw] -mt-[50vh] z-20 bg-gray-400/20 backdrop-blur-sm transition duration-400 flex items-center justify-center">
       <div className="w-full max-w-3xl bg-white rounded-lg shadow-lg">
         {/* Header */}
         <div className="px-6 py-4 border-b border-gray-300">
+          <div className="flex w-full justify-end">
+            <FaXmark className="cursor-pointer" onClick={closeModal} />
+          </div>
           <h2 className="text-[16px] font-bold text-center text-gray-800">
             Create Escrow Contract
           </h2>
