@@ -1,6 +1,9 @@
+"use client";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Hero = () => {
+  const router = useRouter();
   return (
     <section className="flex flex-col items-center py-9 md:py-[35px] bg-[#F5F5F5] px-4 bg-hero-bg bg-contain bg-no-repeat bg-center text-center">
       <div className="max-w-[659px] mb-6">
@@ -16,7 +19,7 @@ const Hero = () => {
         <button className="bg-[#64537B]  px-4 py-3  md:py-[14px] w-[180px] text-center rounded">
           Download SDK
         </button>
-        <button className="bg-[#2D0561] px-4 py-[14px] w-[180px] text-center rounded">
+        <button className="bg-[#2D0561] px-4 py-[14px] w-[180px] text-center rounded" onClick={() => router.push("/dashboard")}>
           Launch App
         </button>
       </div>
