@@ -1,5 +1,5 @@
-import { contracts, transactions } from "../../../data/mock-data";
-import { ContractInterface, TransactionInterface } from "../../../types/types";
+import { contracts, transactions } from "../../data/mock-data";
+import { ContractInterface, TransactionInterface } from "../../types/types";
 import Contract from "../Contracts";
 import DashboardContentContainer from "../DashboardContentContainer";
 import Header from "../dashboardHeader";

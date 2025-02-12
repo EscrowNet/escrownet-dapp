@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import Logo from "../svg/Logo";
+import Logo from "../public/svg/Logo";
 import { useRouter } from "next/navigation";
 
 const Header = () => {

@@ -1,5 +1,5 @@
-import DashboardContentContainer from "@/app/Components/DashboardContentContainer";
-import Header from "../../Components/dashboardHeader";
+import DashboardContentContainer from "@/components/DashboardContentContainer";
+import Header from "../../../components/dashboardHeader";
 
 const SignEscrow = () => {
   return (

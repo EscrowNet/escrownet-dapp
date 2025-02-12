@@ -1,7 +1,7 @@
-import Header from "./Components/Header";
-import Hero from "./Components/Hero";
-import Footer from "./Components/Footer";
-import ModalWorkflow from "./Components/modal-component/modal-workflow/Workflow";
+import Header from "../components/Header";
+import Hero from "../components/Hero";
+import Footer from "../components/Footer";
+import ModalWorkflow from "../components/modal-component/modal-workflow/Workflow";
 
 export default function Home() {
   return (
