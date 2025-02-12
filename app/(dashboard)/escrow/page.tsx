@@ -1,7 +1,7 @@
 import { contracts } from "@/data/mock-data";
-import Contract from "../../components/Contracts";
-import DashboardContentContainer from "../../components/DashboardContentContainer";
-import Header from "../../components/dashboardHeader";
+import Contract from "../../../components/Contracts";
+import DashboardContentContainer from "../../../components/DashboardContentContainer";
+import Header from "../../../components/dashboardHeader";
 import { ContractInterface } from "@/types/types";
 
 function Escrows() {
