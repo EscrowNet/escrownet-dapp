@@ -1,9 +1,9 @@
 import ProgressBar from "../ProgressBar";
 import Pagination from "../Pagination";
 import SummaryHeader from "../SummaryHeader";
-import ContactSummary from "@/app/Components/create-contract-component/summary/ContactSummary";
-import MilestoneSection from "@/app/Components/create-contract-component/summary/MilestoneSection";
-import TermsAndConditions from "@/app/Components/create-contract-component/summary/TermsAndConditions";
+import ContactSummary from "@/components/create-contract-component/summary/ContactSummary";
+import MilestoneSection from "@/components/create-contract-component/summary/MilestoneSection";
+import TermsAndConditions from "@/components/create-contract-component/summary/TermsAndConditions";
 
 export default function SummaryModal({ open }: { open: boolean }) {
   return (

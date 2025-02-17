@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { HiCheck } from "react-icons/hi";
 import { GoDash } from "react-icons/go";
-import usdc from "../../images/usdc.svg";
+import usdc from "@/public/images/usdc.svg";
 import Image from "next/image";
 
 interface ModalProps {
@@ -68,7 +68,7 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex mb-16 items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed left-1/2 top-1/2 h-screen w-screen -ml-[50vw] -mt-[50vh] z-20 bg-gray-400/20 backdrop-blur-sm transition duration-400 flex items-center justify-center">
       <div className="w-full max-w-3xl bg-white rounded-lg shadow-lg">
         {/* Header */}
         <div className="px-6 py-4 border-b border-gray-300">
@@ -91,7 +91,6 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
             </div>
           </div>
 
-         
           <div className="w-16 -ml-4  h-px bg-[#2D0561]"></div>
 
           {/* Condition */}
@@ -120,7 +119,7 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
               </div>
             </div>
           </div>
-       
+
           <div className="w-16 h-px bg-gray-300"></div>
 
           {/* Preview */}
@@ -192,10 +191,8 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
             >
               Payment Amount
             </label>
-          
-            <div className="relative mt-2">
-            
 
+            <div className="relative mt-2">
               <input
                 id="payment-amount"
                 type="text"
@@ -206,11 +203,11 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
               />
               <div className="absolute inset-y-0 right-2 flex items-center pl-3">
                 <Image
-                  src={usdc} 
+                  src={usdc}
                   alt="Payment Icon"
                   width={20}
                   height={20}
-                  className="pointer-events-none" 
+                  className="pointer-events-none"
                 />
               </div>
             </div>

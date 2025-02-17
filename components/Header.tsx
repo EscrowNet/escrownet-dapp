@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import Logo from "../svg/Logo";
+import Logo from "../public/svg/Logo";
 import { useRouter } from "next/navigation";
 
 const Header = () => {
@@ -76,7 +76,7 @@ const Header = () => {
 
       <button
         className="hidden md:block bg-primaryColor text-white px-[46px] py-3 lg:py-[14px] rounded hover:bg-[#64537B] transition-all duration-300 ease-in-out text-base leading-[25px]"
-        onClick={() => router.push("/launch")}
+        onClick={() => router.push("/dashboard")}
       >
         Launch App
       </button>

@@ -3,7 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from "next/image";
-import { usePathname } from 'next/navigation';
+import { usePathname,useRouter } from 'next/navigation';
+
+interface MenuItem {
+  title: string;
+  path: string;
+  icon: React.ReactNode;
+}
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -63,11 +69,7 @@ const Sidebar = () => {
     )
   };
 
-  interface MenuItem {
-    title: string;
-    path: string;
-    icon: React.ReactNode;
-  }
+  const router = useRouter();
 
   const NavLink = ({ item, isActive }: { item: MenuItem; isActive: boolean }) => (
     <Link
@@ -90,12 +92,13 @@ const Sidebar = () => {
       <div className="p-4 flex-1">
         <div className="flex items-center space-x-2 mb-8 mt-[40px]">
           <Image
-            className="h-[21px]"
+            className="h-[21px] cursor-pointer"
             src="/logo.svg"
             alt="Escrownet"
             width={180}
             height={38}
             priority
+            onClick={() => router.push("/")}
           />
         </div>
         

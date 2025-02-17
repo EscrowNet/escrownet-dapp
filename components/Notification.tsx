@@ -1,6 +1,6 @@
 import { NotificationInterface } from "@/types/types";
-import { BellIcon } from "../svg/BellIcon";
-import { WalletIcon } from "../svg/Wallet";
+import { BellIcon } from "../public/svg/BellIcon";
+import { WalletIcon } from "../public/svg/Wallet";
 import { useRouter } from "next/navigation";
 
 export const NotificationItem: React.FC<NotificationInterface> = ({

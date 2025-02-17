@@ -2,12 +2,10 @@
 import React, { useState } from "react";
 import { HiCheck } from "react-icons/hi";
 
-
 interface ModalProps {
   onNext?: () => void;
   onPrevious?: () => void;
 }
-
 
 const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
   const [selectedMilestone, setSelectedMilestone] = useState("");
@@ -28,7 +26,7 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex mb-16 items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed left-1/2 top-1/2 h-screen w-screen -ml-[50vw] -mt-[50vh] z-20 bg-gray-400/20 backdrop-blur-sm transition duration-400 flex items-center justify-center">
       <div className="w-full max-w-3xl bg-white rounded-lg shadow-lg">
         {/* Header */}
         <div className="px-6 py-4 border-b border-gray-300">
@@ -65,7 +63,6 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
             </div>
           </div>
 
-        
           <div className="-ml-4 w-16 h-px bg-gray-300"></div>
 
           {/* Payment */}
@@ -80,7 +77,7 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
               </div>
             </div>
           </div>
-       
+
           <div className="w-16 h-px bg-gray-300"></div>
 
           {/* Preview */}
@@ -96,7 +93,7 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
         </div>
 
         {/* Form */}
-         <div className="p-6 space-y-2">
+        <div className="p-6 space-y-2">
           <div className="mb-6">
             {" "}
             <label
@@ -131,7 +128,6 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
                       <div className="flex w-full justify-between items-center">
                         <span className="font-medium">{milestone.title}</span>
 
-                        
                         {selectedMilestone === milestone.title && (
                           <div className="flex">
                             <div className="w-6 h-6 flex items-center justify-center border-2 border-[#2D0561] rounded-full">
@@ -169,13 +165,13 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
 
         {/* Footer */}
         <div className="flex justify-center px-6 py-4 gap-[24px]">
-        <button 
+          <button
             onClick={onPrevious}
             className="px-6 py-2 w-[323px] h-[52px] bg-[#2D0561] text-white rounded-[4px] hover:bg-[#2d0561ee] focus:outline-none focus:ring-2 focus:ring-[#D9D9D9] focus:ring-offset-2"
           >
             Previous
           </button>
-          <button 
+          <button
             onClick={onNext}
             className="px-6 py-2 w-[323px] h-[52px] bg-[#2D0561] text-white rounded-[4px] hover:bg-[#2d0561ee] focus:outline-none focus:ring-2 focus:ring-[#D9D9D9] focus:ring-offset-2"
           >
