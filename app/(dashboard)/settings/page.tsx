@@ -26,9 +26,7 @@ const page = () => {
             <h2 className="text-[#131313] font-sans font-[600] text-[1rem] leading-[1.5625rem] opacity-60">
               Escrow status update
             </h2>
-            <ToggleSwitch
-              activeStateAction={() => console.log("do something")}
-            />
+            <ToggleSwitch activeStateAction={() => {}} />
           </div>
         </div>
       </DashboardContentContainer>

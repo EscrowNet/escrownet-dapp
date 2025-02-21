@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 interface IToggleSwitch {
-  activeStateAction: () => void;
+  activeStateAction: () => void;    // receives the function called when toggle is on
 }
 export const ToggleSwitch: React.FC<IToggleSwitch> = ({ activeStateAction }) => {
   const [isOn, setIsOn] = useState(false);
