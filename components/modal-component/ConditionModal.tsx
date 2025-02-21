@@ -19,7 +19,7 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
       title: "Automatic release upon milestone completion.",
     },
   ];
-
+  const [stateMilestones, setStateMilestones] = useState(milestones);
   const handleMilestoneClick = (title: string) => {
     setSelectedMilestone(title);
     setIsDropdownOpen(false);
@@ -114,7 +114,7 @@ const ConditionModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
               </button>
               {isDropdownOpen && (
                 <ul className="absolute z-10 mt-1 w-full bg-white shadow-lg rounded-md border border-[#D9D9D9]">
-                  {milestones.map((milestone, index) => (
+                  {stateMilestones.map((milestone, index) => (
                     <li
                       key={index}
                       onClick={() => handleMilestoneClick(milestone.title)}

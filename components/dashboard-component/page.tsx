@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import { contracts, transactions } from "../../data/mock-data";
 import { ContractInterface, TransactionInterface } from "../../types/types";
 import Contract from "../Contracts";
@@ -6,6 +8,11 @@ import TotalTransactionChart from "../TotalTransactionChart";
 import Transaction from "../Transaction";
 
 export default function Home() {
+  const [contractsInState, setContractsInState] =
+    useState<ContractInterface[]>(contracts);
+  const [transactionsInState, setTransactionsInState] =
+    useState<TransactionInterface[]>(transactions);
+
   return (
     <div className="p-6 w-full h-full">
       <div className="w-full flex gap-x-8">
@@ -13,7 +20,7 @@ export default function Home() {
           title="Your active contracts"
           className="w-1/2  h-[34rem]"
         >
-          {contracts.map((contract: ContractInterface) => (
+          {contractsInState.map((contract: ContractInterface) => (
             <Contract
               key={contract.title}
               title={contract.title}
@@ -38,7 +45,7 @@ export default function Home() {
         title="Transaction History"
         className="w-full h-[20.9rem] mt-[1.5rem]"
       >
-        {transactions.map((transaction: TransactionInterface, index) => (
+        {transactionsInState.map((transaction: TransactionInterface, index) => (
           <Transaction
             key={index + transaction.date + transaction.amount}
             image={transaction.image}
