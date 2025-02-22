@@ -11,7 +11,7 @@ interface Transaction {
   status: string
 }
 
-export default function TransactionList() {
+export default function Page() {
   const transactions: Transaction[] = [
     {
       id: 1,
