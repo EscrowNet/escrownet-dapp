@@ -4,8 +4,6 @@ interface Transaction {
   id: number
   company: string
   logo: string
-  logoInitial: string
-  logoColor: string
   location: string
   amount: number
   status: string
@@ -17,8 +15,6 @@ export default function Page() {
       id: 1,
       company: "Mstone.com",
       logo: "/mstone.png",
-      logoInitial: "M",
-      logoColor: "bg-slate-900",
       location: "Canada",
       amount: 700,
       status: "1st Milestone",
@@ -27,8 +23,6 @@ export default function Page() {
       id: 2,
       company: "Jastone.ng",
       logo: "/jastone.png",
-      logoInitial: "J",
-      logoColor: "bg-orange-500",
       location: "Canada",
       amount: 700,
       status: "1st Milestone",
@@ -37,8 +31,6 @@ export default function Page() {
       id: 3,
       company: "Mstone.com",
       logo: "/mstone.png",
-      logoInitial: "M",
-      logoColor: "bg-slate-900",
       location: "Canada",
       amount: 700,
       status: "1st Milestone",
@@ -47,8 +39,6 @@ export default function Page() {
       id: 4,
       company: "Jastone.ng",
       logo: "/jastone.png",
-      logoInitial: "J",
-      logoColor: "bg-orange-500",
       location: "Canada",
       amount: 700,
       status: "1st Milestone",
@@ -57,8 +47,6 @@ export default function Page() {
       id: 5,
       company: "Mstone.com",
       logo: "/mstone.png",
-      logoInitial: "M",
-      logoColor: "bg-slate-900",
       location: "Canada",
       amount: 700,
       status: "1st Milestone",
@@ -67,8 +55,6 @@ export default function Page() {
       id: 6,
       company: "Jastone.ng",
       logo: "/jastone.png",
-      logoInitial: "J",
-      logoColor: "bg-orange-500",
       location: "Canada",
       amount: 700,
       status: "1st Milestone",
