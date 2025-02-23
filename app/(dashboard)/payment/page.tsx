@@ -1,6 +1,7 @@
 import { TransactionModal } from "@/components/create-transaction-modal/transaction-modal";
 import React from "react";
-import Image from "next/image";
+import PaymentList from "@/components/PaymentList";
+import { payments } from "@/data/mock-data"
 // import mstone from "../../../public/";
 
 const page = () => {
@@ -23,7 +24,7 @@ const page = () => {
   }
   return (
     <div>
-      <h3>Hi, This is the payment page</h3>
+      <PaymentList payments={payments} />
       <TransactionModal transaction={transactionData}/>
     </div>
   );
@@ -59,4 +60,3 @@ export default page;
 //     </div>
 //   )
 // }
-
