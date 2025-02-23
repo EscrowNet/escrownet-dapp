@@ -74,6 +74,7 @@ export const notifications: NotificationInterface[] = [
 
 export const payments: PaymentsInterface[] = [
   {
+    id: 1,
     company: {
       name: "Mstone.com",
       location: "Canada",
@@ -90,6 +91,7 @@ export const payments: PaymentsInterface[] = [
     },
   },
   {
+    id: 2,
     company: {
       name: "Jastone.ng",
       location: "Canada",
@@ -106,6 +108,7 @@ export const payments: PaymentsInterface[] = [
     },
   },
   {
+    id: 3,
     company: {
       name: "Mstone.com",
       location: "Canada",
@@ -122,6 +125,7 @@ export const payments: PaymentsInterface[] = [
     },
   },
   {
+    id: 4,
     company: {
       name: "Jastone.ng",
       location: "Canada",
@@ -138,6 +142,7 @@ export const payments: PaymentsInterface[] = [
     },
   },
   {
+    id: 5,
     company: {
       name: "Mstone.com",
       location: "Canada",
@@ -154,6 +159,7 @@ export const payments: PaymentsInterface[] = [
     },
   },
   {
+    id: 6,
     company: {
       name: "Jastone.ng",
       location: "Canada",

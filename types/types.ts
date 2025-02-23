@@ -24,6 +24,7 @@ export interface ContractInterface {
   }
 
   export interface PaymentsInterface {
+    id: number
     company: {
       name: string
       location: string

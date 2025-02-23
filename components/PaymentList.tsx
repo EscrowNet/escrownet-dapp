@@ -37,7 +37,7 @@ export default function PaymentList({ payments }: { payments: PaymentsInterface[
         ) : (
           <div className="space-y-4">
             {payments.map((transaction) => (
-              <div key={transaction.company.name} className="flex items-center justify-between p-4 bg-[#2D05610A] rounded-lg">
+              <div key={transaction.id} className="flex items-center justify-between p-4 bg-[#2D05610A] rounded-lg">
                 <div className="flex items-center gap-3">
                   <Image src={transaction.company.logo} alt={transaction.company.name} width={40} height={40} />
                   <div>
