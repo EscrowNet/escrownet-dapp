@@ -22,3 +22,20 @@ export interface ContractInterface {
     type : "info" | "action";
     id ?: number;
   }
+
+  export interface PaymentsInterface {
+    company: {
+      name: string
+      location: string
+      logo: string
+    }
+    amount: number
+    milestone: string
+    details: {
+      milestone: string
+      amountPaid: number
+      recipientWallet: string
+      status: string
+      description: string
+    }
+  }
