@@ -2,6 +2,7 @@ import {
   ContractInterface,
   NotificationInterface,
   TransactionInterface,
+  PaymentsInterface
 } from "../types/types";
 
 export const contracts: ContractInterface[] = [
@@ -70,3 +71,102 @@ export const notifications: NotificationInterface[] = [
     type: "info",
   },
 ];
+
+export const payments: PaymentsInterface[] = [
+  {
+    company: {
+      name: "Mstone.com",
+      location: "Canada",
+      logo: "/mstone.png",
+    },
+    amount: 700,
+    milestone: "1st Milestone",
+    details: {
+      milestone: "First Milestone Completed",
+      amountPaid: 700,
+      recipientWallet: "[User's Wallet Address]",
+      status: "Released",
+      description: "The first milestone has been successfully completed, and $700 has been released to the recipient's wallet. The funds are now available for use.",
+    },
+  },
+  {
+    company: {
+      name: "Jastone.ng",
+      location: "Canada",
+      logo: "/jastone.png",
+    },
+    amount: 700,
+    milestone: "1st Milestone",
+    details: {
+      milestone: "First Milestone Completed",
+      amountPaid: 700,
+      recipientWallet: "[User's Wallet Address]",
+      status: "Released",
+      description: "The first milestone has been successfully completed, and $700 has been released to the recipient's wallet. The funds are now available for use.",
+    },
+  },
+  {
+    company: {
+      name: "Mstone.com",
+      location: "Canada",
+      logo: "/mstone.png",
+    },
+    amount: 700,
+    milestone: "1st Milestone",
+    details: {
+      milestone: "First Milestone Completed",
+      amountPaid: 700,
+      recipientWallet: "[User's Wallet Address]",
+      status: "Released",
+      description: "The first milestone has been successfully completed, and $700 has been released to the recipient's wallet. The funds are now available for use.",
+    },
+  },
+  {
+    company: {
+      name: "Jastone.ng",
+      location: "Canada",
+      logo: "/jastone.png",
+    },
+    amount: 700,
+    milestone: "1st Milestone",
+    details: {
+      milestone: "First Milestone Completed",
+      amountPaid: 700,
+      recipientWallet: "[User's Wallet Address]",
+      status: "Released",
+      description: "The first milestone has been successfully completed, and $700 has been released to the recipient's wallet. The funds are now available for use.",
+    },
+  },
+  {
+    company: {
+      name: "Mstone.com",
+      location: "Canada",
+      logo: "/mstone.png",
+    },
+    amount: 700,
+    milestone: "1st Milestone",
+    details: {
+      milestone: "First Milestone Completed",
+      amountPaid: 700,
+      recipientWallet: "[User's Wallet Address]",
+      status: "Released",
+      description: "The first milestone has been successfully completed, and $700 has been released to the recipient's wallet. The funds are now available for use.",
+    },
+  },
+  {
+    company: {
+      name: "Jastone.ng",
+      location: "Canada",
+      logo: "/jastone.png",
+    },
+    amount: 700,
+    milestone: "1st Milestone",
+    details: {
+      milestone: "First Milestone Completed",
+      amountPaid: 700,
+      recipientWallet: "[User's Wallet Address]",
+      status: "Released",
+      description: "The first milestone has been successfully completed, and $700 has been released to the recipient's wallet. The funds are now available for use.",
+    },
+  },
+]
