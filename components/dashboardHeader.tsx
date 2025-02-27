@@ -6,9 +6,14 @@ import { NotificationItem } from "./Notification";
 import { NotificationInterface } from "@/types/types";
 import { notifications } from "@/data/mock-data";
 import ClickOutsideWrapper from "./outsideClick";
+import ConnectButton from "./ConnectButton";
+import { useAccount } from "@starknet-react/core";
+import AddressBar from "./AddressBar";
 
 export default function dashboardHeader() {
   const [showNotifications, setShowNotifications] = useState(false);
+  const { address, account } = useAccount();
+  console.log(account);
   const [allNotifications, setAllNotifications] = useState<
     NotificationInterface[] | null
   >(null);
@@ -42,12 +47,16 @@ export default function dashboardHeader() {
           height={24}
         />
       </div>
-      <div className="bg-primaryColor text-[#ffffff] font-bold py-2 px-4 rounded-[4px] ">
-        0xB7A93...XMASH
-      </div>
+      {!address || !account ? (
+        <ConnectButton />
+      ) : (
+        <AddressBar address={address} />
+      )}
       {showNotifications && (
-        <ClickOutsideWrapper onClickOutside={() => setShowNotifications(false)} className="absolute bg-white top-[100%] right-[1rem] pl-4 pr-4 pt-4 pb-2 rounded bg-white w-[30%] z-10 shadow-lg">
-        
+        <ClickOutsideWrapper
+          onClickOutside={() => setShowNotifications(false)}
+          className="absolute top-[100%] right-[1rem] pl-4 pr-4 pt-4 pb-2 rounded bg-white w-[30%] z-10 shadow-lg"
+        >
           <div className="flex items-center justify-between pb-2  border-b-2 border-[#C4C4C4]">
             <p className="text-center font-sans text-[0.875rem] font-medium leading-[1.5625rem] text-[rgba(58,58,58,0.70)]">
               Notifications
@@ -86,7 +95,6 @@ export default function dashboardHeader() {
               />
             ))}
           </div>
-        
         </ClickOutsideWrapper>
       )}
     </header>

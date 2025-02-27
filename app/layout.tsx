@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { StarknetProvider } from "@/components/StarknetProvider";
 
 export const metadata: Metadata = {
   title: "Escrownet",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <StarknetProvider>{children}</StarknetProvider>
+      </body>
     </html>
   );
 }
