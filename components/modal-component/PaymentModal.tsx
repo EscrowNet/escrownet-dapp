@@ -1,16 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { HiCheck } from "react-icons/hi";
 import { GoDash } from "react-icons/go";
 import usdc from "@/public/images/usdc.svg";
 import Image from "next/image";
+import { useAccount, useContract, useSendTransaction } from "@starknet-react/core";
+import { ABI } from "@/lib/abi/abi";
+import { CallData } from "starknet";
 
 interface ModalProps {
   onNext?: () => void;
   onPrevious?: () => void;
+  closeModal: () => void;
 }
 
-const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
+const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious, closeModal }) => {
   const [selectedMilestone, setSelectedMilestone] = useState("");
   const [paymentAmount, setPaymentAmount] = useState("");
   const [paymentPercentage, setPaymentPercentage] = useState("");
@@ -66,6 +70,50 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
     setPaymentPercentage(selectedMilestoneBreakdown);
     setIsPaymentPercentageDropdownOpen(false);
   };
+
+  const {
+    address: user
+  } = useAccount()
+
+  const { contract } = useContract({
+    abi: ABI,
+    address: '0x070211a2a9dd05092df51e080732d0a390b5b8353078e7a78a686af71689dfea',
+  })
+
+  console.log(contract)
+
+  let beneficiary = '0x070D878a25fdc4911b121887bc2883d02396814720807ED7cb38358Ac09a6e44'
+
+  let arbiter = '0x0168d601Be0C2bDCD09D7568d7Ed711D2A330Cd7488E7539fA66b56144EC998f'
+
+  const salt = BigInt(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+
+  const calls = useMemo(() => {
+    const isInputValid = user && selectedMilestone !== "" && paymentPercentage !== "" && paymentAmount !== "";
+
+    if (!isInputValid || !contract ) return
+
+    return [contract?.populate("deploy_escrow", [user, beneficiary, arbiter, salt])]
+  }, [selectedMilestone, paymentPercentage, paymentAmount])
+
+  console.log(calls)
+
+  const {
+    sendAsync, data, isPending, isError, error
+  } = useSendTransaction({
+    calls
+  })
+
+  const deployEscrow = async () => {
+    console.log('Hit the ground running')
+    try {
+      console.log('Keep running and trying')
+      await sendAsync();
+      closeModal();
+    } catch (err) {
+      console.log('Catching...', err)
+    }
+  }
 
   return (
     <div className="fixed left-1/2 top-1/2 h-screen w-screen -ml-[50vw] -mt-[50vh] z-20 bg-gray-400/20 backdrop-blur-sm transition duration-400 flex items-center justify-center">
@@ -272,7 +320,11 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious }) => {
             Previous
           </button>
           <button
-            onClick={onNext}
+            onClick={(e) => {
+              console.log("I've been clicked")
+              e.preventDefault();
+              deployEscrow();
+            }}
             className="px-6 py-2 w-[323px] h-[52px] bg-[#2D0561] text-white rounded-[4px] hover:bg-[#2d0561ee] focus:outline-none focus:ring-2 focus:ring-[#D9D9D9] focus:ring-offset-2"
           >
             Next
