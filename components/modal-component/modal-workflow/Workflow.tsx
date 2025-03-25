@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import MilestoneModal from "../MilestoneModal";
 import ConditionModal from "../ConditionModal";
 import PaymentModal from "../PaymentModal";
+import PreviewModal from "../PreviewModal";
 
 interface ModalProps {
   onNext?: () => void;
@@ -15,7 +16,7 @@ interface IModalWorkflow {
 }
 const ModalWorkflow: React.FC<IModalWorkflow> = ({ closeModal }) => {
   const [currentStep, setCurrentStep] = useState<
-    "milestone" | "condition" | "payment"
+    "milestone" | "condition" | "payment" | "preview"
   >("milestone");
 
   const handleNextFromMilestone = () => {
@@ -32,6 +33,14 @@ const ModalWorkflow: React.FC<IModalWorkflow> = ({ closeModal }) => {
 
   const handlePreviousFromPayment = () => {
     setCurrentStep("condition");
+  };
+
+  const handleNextFromPayment = () => {
+    setCurrentStep("preview");
+  };
+
+  const handlePreviousFromPreview = () => {
+    setCurrentStep("payment");
   };
 
   return (
@@ -51,7 +60,15 @@ const ModalWorkflow: React.FC<IModalWorkflow> = ({ closeModal }) => {
       {currentStep === "payment" && (
         <PaymentModal
           onPrevious={handlePreviousFromPayment}
-          onNext={() => {}}
+          onNext={handleNextFromPayment}
+        />
+      )}
+
+      {currentStep === "preview" && (
+        <PreviewModal
+          onPrevious={handlePreviousFromPreview}
+          closeModal={closeModal}
+        // onNext={() => {}}
         />
       )}
     </>
