@@ -1,9 +1,9 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { HiCheck } from "react-icons/hi";
-import { GoDash } from "react-icons/go";
-import usdc from "@/public/images/usdc.svg";
 import Image from "next/image";
+import usdc from "@/public/images/usdc.svg";
+import { useEscrowStore } from "@/store/useEscrowStore";
 import { useAccount, useContract, useSendTransaction } from "@starknet-react/core";
 import { ABI } from "@/lib/abi/abi";
 import { CallData } from "starknet";
@@ -15,60 +15,39 @@ interface ModalProps {
 }
 
 const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious, closeModal }) => {
-  const [selectedMilestone, setSelectedMilestone] = useState("");
-  const [paymentAmount, setPaymentAmount] = useState("");
-  const [paymentPercentage, setPaymentPercentage] = useState("");
-  const [isMilestoneDropdownOpen, setIsMilestoneDropdownOpen] = useState(false);
-  const [isPaymentPercentageDropdownOpen, setIsPaymentPercentageDropdownOpen] =
-    useState(false);
+  const {
+    payments,
+    paymentAmount,
+    selectedPaymentStructure,
+    setPaymentAmount,
+    setSelectedPaymentStructure,
+    completeStep
+  } = useEscrowStore();
+  
+  const [localPaymentAmount, setLocalPaymentAmount] = useState(paymentAmount);
+  const [localSelectedPaymentStructure, setLocalSelectedPaymentStructure] = useState(selectedPaymentStructure);
+  const [isPaymentStructureDropdownOpen, setIsPaymentStructureDropdownOpen] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+  
+  // Validate form
+  useEffect(() => {
+    setIsFormValid(!!localPaymentAmount && !!localSelectedPaymentStructure);
+  }, [localPaymentAmount, localSelectedPaymentStructure]);
 
-  const milestones = [
-    {
-      percentageBreakdown: [
-        { stage: "Initial Deposit Paid", percentage: 50 },
-        { stage: "First Draft Delivered", percentage: 25 },
-        { stage: "Revisions Completed", percentage: 15 },
-        { stage: "Final Delivery Approved", percentage: 10 },
-      ],
-    },
-    {
-      percentageBreakdown: [
-        { stage: "Initial Deposit Paid", percentage: 25 },
-        { stage: "First Draft Delivered", percentage: 25 },
-        { stage: "Revisions Completed", percentage: 25 },
-        { stage: "Final Delivery Approved", percentage: 25 },
-      ],
-    },
-    {
-      percentageBreakdown: [
-        { stage: "Initial Deposit Paid", percentage: 20 },
-        { stage: "First Draft Delivered", percentage: 20 },
-        { stage: "Revisions Completed", percentage: 20 },
-        { stage: "Final Delivery Approved", percentage: 40 },
-      ],
-    },
-  ];
-
-  const handleMilestoneClick = (index: number) => {
-    setSelectedMilestone(
-      milestones[index].percentageBreakdown
-        .map((p) => `${p.stage}: ${p.percentage}%`)
-        .join(" - ")
-    );
-    setIsMilestoneDropdownOpen(false);
+  const handlePaymentStructureClick = (paymentPercentageStructure: string) => {
+    setLocalSelectedPaymentStructure(paymentPercentageStructure);
+    setIsPaymentStructureDropdownOpen(false);
   };
 
-  const handlePaymentAmountChange = (amount: string) => {
-    setPaymentAmount(amount);
-  };
-
-  const handlePaymentPercentageChange = (index: number) => {
-    const selectedMilestoneBreakdown = milestones[index].percentageBreakdown
-      .map((p) => `${p.stage}: ${p.percentage}%`)
-      .join(" - ");
-
-    setPaymentPercentage(selectedMilestoneBreakdown);
-    setIsPaymentPercentageDropdownOpen(false);
+  const handleNext = () => {
+    if (!isFormValid) return;
+    
+    // Save data to store
+    setPaymentAmount(localPaymentAmount);
+    setSelectedPaymentStructure(localSelectedPaymentStructure);
+    completeStep('payment');
+    
+    if (onNext) onNext();
   };
 
   const {
@@ -91,12 +70,12 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious, closeModal }) 
   const salt = BigInt(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
 
   const calls = useMemo(() => {
-    const isInputValid = user && selectedMilestone !== "" && paymentPercentage !== "" && paymentAmount !== "";
+    const isInputValid = user && localPaymentAmount !== "" || false && localSelectedPaymentStructure !== "" && paymentAmount !== "" || undefined;
 
     if (!isInputValid || !contract ) return
 
     return [contract?.populate("deploy_escrow", [user, beneficiary2, arbiter, salt])]
-  }, [selectedMilestone, paymentPercentage, paymentAmount])
+  }, [localPaymentAmount, localSelectedPaymentStructure, paymentAmount])
 
   console.log(calls)
 
@@ -186,48 +165,54 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious, closeModal }) 
 
         {/* Form */}
         <div className="p-6 space-y-6">
-          {/* Milestone Dropdown */}
+          {/* Payment Structure Dropdown */}
           <div>
             <label
-              htmlFor="type-of-milestone"
+              htmlFor="payment-structure"
               className="block text-sm font-medium text-gray-700"
             >
               Milestone Payment Structure
             </label>
             <div className="relative mt-2">
               <button
-                onClick={() =>
-                  setIsMilestoneDropdownOpen(!isMilestoneDropdownOpen)
-                }
+                onClick={() => setIsPaymentStructureDropdownOpen(!isPaymentStructureDropdownOpen)}
                 className="w-full border border-[#D9D9D9] rounded-md shadow-sm pl-4 pr-8 py-2 text-left focus:ring-[#D9D9D9] focus:border-[#D9D9D9] sm:text-sm bg-white"
               >
-                {selectedMilestone || "Select milestone structure"}
+                {localSelectedPaymentStructure || "Select milestone structure"}
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   ▼
                 </span>
               </button>
-              {isMilestoneDropdownOpen && (
+              {isPaymentStructureDropdownOpen && (
                 <ul className="absolute z-10 mt-1 w-full bg-white shadow-lg rounded-md border border-[#D9D9D9]">
-                  {milestones.map((milestone, index) => (
-                    <li
-                      key={index}
-                      onClick={() => handleMilestoneClick(index)}
-                      className={`cursor-pointer px-4 py-2 hover:bg-purple-50 text-[14px] font-[500] flex flex-col space-y-1 ${
-                        selectedMilestone ===
-                        milestone.percentageBreakdown
-                          .map((p) => `${p.stage}: ${p.percentage}%`)
-                          .join(" - ")
-                          ? "bg-purple-100 font-medium text-purple-700"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      <div className="text-xs text-gray-600">
-                        {milestone.percentageBreakdown
-                          .map((p) => `${p.stage}: ${p.percentage}%`)
-                          .join(" - ")}
-                      </div>
-                    </li>
-                  ))}
+                  {payments.map((payment: any, index: number) => {
+                    const structureText = payment.percentageBreakdown
+                      .map((p: any) => `${p.stage}: ${p.percentage}%`)
+                      .join(" - ");
+                    
+                    return (
+                      <li
+                        key={index}
+                        onClick={() => handlePaymentStructureClick(structureText)}
+                        className={`cursor-pointer px-4 py-2 hover:bg-purple-50 text-[14px] font-[500] flex flex-col space-y-1 ${
+                          localSelectedPaymentStructure === structureText
+                            ? "bg-purple-100 font-medium text-purple-700"
+                            : "text-gray-700"
+                        }`}
+                      >
+                        <div className="text-xs text-gray-600">
+                          {structureText}
+                        </div>
+                        {localSelectedPaymentStructure === structureText && (
+                          <div className="flex justify-end">
+                            <div className="w-6 h-6 flex items-center justify-center border-2 border-[#2D0561] rounded-full">
+                              <div className="w-2 h-2 bg-[#2D0561] rounded-full"></div>
+                            </div>
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </div>
@@ -246,9 +231,9 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious, closeModal }) 
               <input
                 id="payment-amount"
                 type="text"
-                value={paymentAmount}
-                onChange={(e) => handlePaymentAmountChange(e.target.value)}
-                className="w-full border border-[#D9D9D9] rounded-md shadow-sm pl-4 pr-4 py-2 focus:ring-[#D9D9D9] focus:border-[#D9D9D9] sm:text-sm"
+                value={localPaymentAmount}
+                onChange={(e) => setLocalPaymentAmount(e.target.value)}
+                className="w-full border border-[#D9D9D9] rounded-md shadow-sm pl-4 pr-10 py-2 focus:ring-[#D9D9D9] focus:border-[#D9D9D9] sm:text-sm"
                 placeholder="Enter payment amount"
               />
               <div className="absolute inset-y-0 right-2 flex items-center pl-3">
@@ -261,55 +246,9 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious, closeModal }) 
                 />
               </div>
             </div>
-          </div>
-
-          {/* Payment Percentage */}
-          <div>
-            <label
-              htmlFor="payment-percentage"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Payment Percentage
-            </label>
-            <div className="relative mt-2">
-              <button
-                onClick={() =>
-                  setIsPaymentPercentageDropdownOpen(
-                    !isPaymentPercentageDropdownOpen
-                  )
-                }
-                className="w-full border border-[#D9D9D9] rounded-md shadow-sm pl-4 pr-8 py-2 text-left focus:ring-[#D9D9D9] focus:border-[#D9D9D9] sm:text-sm bg-white"
-              >
-                {paymentPercentage || "Select milestone payment structure"}
-                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                  ▼
-                </span>
-              </button>
-              {isPaymentPercentageDropdownOpen && (
-                <ul className="absolute z-10 mt-1 w-full bg-white shadow-lg rounded-md border border-[#D9D9D9]">
-                  {milestones.map((milestone, index) => (
-                    <li
-                      key={index}
-                      onClick={() => handlePaymentPercentageChange(index)}
-                      className={`cursor-pointer px-4 py-2 hover:bg-purple-50 text-[14px] font-[500] flex flex-col space-y-1 ${
-                        paymentPercentage ===
-                        milestone.percentageBreakdown
-                          .map((p) => `${p.stage}: ${p.percentage}%`)
-                          .join(" - ")
-                          ? "bg-purple-100 font-medium text-purple-700"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      <div className="text-xs text-gray-600">
-                        {milestone.percentageBreakdown
-                          .map((p) => `${p.stage}: ${p.percentage}%`)
-                          .join(" - ")}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+            <p className="text-[12px] text-gray-500 mt-2">
+              Enter the total payment amount for this contract in USDC
+            </p>
           </div>
         </div>
 
