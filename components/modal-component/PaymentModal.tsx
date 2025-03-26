@@ -84,6 +84,8 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious, closeModal }) 
 
   let beneficiary = '0x070D878a25fdc4911b121887bc2883d02396814720807ED7cb38358Ac09a6e44'
 
+  let beneficiary2 = '0x6474c1dc96640f06dd6cd87f8f94f2877d127f672bce98ee305f45417a4d2df'
+
   let arbiter = '0x0168d601Be0C2bDCD09D7568d7Ed711D2A330Cd7488E7539fA66b56144EC998f'
 
   const salt = BigInt(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
@@ -93,7 +95,7 @@ const PaymentModal: React.FC<ModalProps> = ({ onNext, onPrevious, closeModal }) 
 
     if (!isInputValid || !contract ) return
 
-    return [contract?.populate("deploy_escrow", [user, beneficiary, arbiter, salt])]
+    return [contract?.populate("deploy_escrow", [user, beneficiary2, arbiter, salt])]
   }, [selectedMilestone, paymentPercentage, paymentAmount])
 
   console.log(calls)
