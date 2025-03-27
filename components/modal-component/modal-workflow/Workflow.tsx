@@ -60,6 +60,7 @@ const ModalWorkflow: React.FC<IModalWorkflow> = ({ closeModal }) => {
       {currentStep === "payment" && (
         <PaymentModal
           onPrevious={handlePreviousFromPayment}
+          closeModal={closeModal}
           onNext={handleNextFromPayment}
         />
       )}
