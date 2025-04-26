@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
-import ConnectModal from "./ConnectModal";
+import WalletOptionsModal from "./WalletOptionsModal";
 
 function ConnectButton() {
   const [connectModalIsOpen, setConnectModalIsOpen] = useState(false);
@@ -9,7 +9,7 @@ function ConnectButton() {
     <>
       {connectModalIsOpen &&
         createPortal(
-          <ConnectModal handleClose={() => setConnectModalIsOpen(false)} />,
+          <WalletOptionsModal handleClose={() => setConnectModalIsOpen(false)} />,
           document.body
         )}
       <button
