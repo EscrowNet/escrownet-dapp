@@ -32,8 +32,11 @@ const Header = () => {
         </nav>
       </div>
       <button
-        className="block md:hidden text-gray-700 focus:outline-none"
+        className="block md:hidden text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primaryColor"
         onClick={() => setMenuOpen(!menuOpen)}
+        aria-expanded={menuOpen}
+        aria-controls="mobile-menu"
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
       >
         <svg
           className="w-6 h-6"
@@ -41,6 +44,7 @@ const Header = () => {
           stroke="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -51,23 +55,25 @@ const Header = () => {
         </svg>
       </button>
       <nav
+        id="mobile-menu"
         className={`${
           menuOpen ? "block" : "hidden"
         } absolute md:relative top-16 md:top-auto left-0 w-full md:w-auto md:flex bg-white md:bg-transparent z-50 md:z-auto flex-col md:flex-row md:items-center`}
+        aria-label="Main navigation"
       >
         <ul className="flex flex-col md:hidden space-y-4 text-lg text-gray-700 p-4">
           <li className="hover:text-gray-500 cursor-pointer">
-            <Link href="/">
+            <Link href="/" className="block p-2 focus:outline-none focus:ring-2 focus:ring-primaryColor focus:ring-offset-2 rounded">
               <span onClick={() => setMenuOpen(false)}>Escrow</span>
             </Link>
           </li>
           <li className="hover:text-gray-500 cursor-pointer">
-            <Link href="/explore">
+            <Link href="/explore" className="block p-2 focus:outline-none focus:ring-2 focus:ring-primaryColor focus:ring-offset-2 rounded">
               <span onClick={() => setMenuOpen(false)}>Explore</span>
             </Link>
           </li>
           <li className="hover:text-gray-500 cursor-pointer">
-            <Link href="/api">
+            <Link href="/api" className="block p-2 focus:outline-none focus:ring-2 focus:ring-primaryColor focus:ring-offset-2 rounded">
               <span onClick={() => setMenuOpen(false)}>API</span>
             </Link>
           </li>
@@ -75,8 +81,9 @@ const Header = () => {
       </nav>
 
       <button
-        className="hidden md:block bg-primaryColor text-white px-[46px] py-3 lg:py-[14px] rounded hover:bg-[#64537B] transition-all duration-300 ease-in-out text-base leading-[25px]"
+        className="hidden md:block bg-primaryColor text-white px-[46px] py-3 lg:py-[14px] rounded hover:bg-[#64537B] transition-all duration-300 ease-in-out text-base leading-[25px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primaryColor"
         onClick={() => router.push("/dashboard")}
+        aria-label="Launch Dashboard App"
       >
         Launch App
       </button>

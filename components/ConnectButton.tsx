@@ -13,11 +13,13 @@ function ConnectButton() {
           document.body
         )}
       <button
-        className="bg-primaryColor text-[#ffffff] font-bold py-2 px-4 rounded-[4px]"
+        className="bg-primaryColor text-[#ffffff] font-bold py-2 px-4 rounded-[4px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primaryColor hover:bg-opacity-90 transition-colors"
         onClick={() => {
-          console.log("clicking connect wallet");
           setConnectModalIsOpen(true);
         }}
+        aria-haspopup="dialog"
+        aria-expanded={connectModalIsOpen}
+        aria-label="Connect wallet"
       >
         Connect Wallet
       </button>

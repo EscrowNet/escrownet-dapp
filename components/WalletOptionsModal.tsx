@@ -1,8 +1,30 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import LockBodyScroll from "./LockBodyScroll";
 
 function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
+  // Create a ref for the first focusable element
+  const firstButtonRef = useRef<HTMLButtonElement>(null);
+  
+  // Focus trap and keyboard navigation
+  useEffect(() => {
+    // Focus the first button when modal opens
+    if (firstButtonRef.current) {
+      firstButtonRef.current.focus();
+    }
+    
+    // Listen for ESC key event dispatched by LockBodyScroll
+    const handleEscKeyEvent = () => {
+      handleClose();
+    };
+    
+    document.addEventListener("escrownet:escapePressed", handleEscKeyEvent);
+    
+    return () => {
+      document.removeEventListener("escrownet:escapePressed", handleEscKeyEvent);
+    };
+  }, [handleClose]);
+  
   // Handlers for wallet selection (just logging for now as per requirements)
   const handleInvisibleSDK = () => {
     console.log("Invisible SDK selected");
@@ -18,24 +40,31 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
     <>
       <LockBodyScroll lock={true} />
       <div
-        className="absolute inset-0 flex justify-center pt-[200px] bg-white bg-opacity-80 backdrop-blur-sm"
+        className="fixed inset-0 flex justify-center pt-[200px] bg-white bg-opacity-80 backdrop-blur-sm z-50"
         onClick={handleClose}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="wallet-options-title"
       >
         <div
-          className="px-6 py-[18px] bg-white rounded w-[450px] border-[#C4C4C4] border h-fit"
+          className="px-6 py-[18px] bg-white rounded w-[450px] border-[#C4C4C4] border h-fit shadow-lg"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between pb-2 border-b-2 border-[#C4C4C4]">
-            <p className="text-center font-sans text-[0.875rem] font-medium leading-[1.5625rem] text-[rgba(58,58,58,0.70)]">
+            <h2 
+              id="wallet-options-title" 
+              className="text-center font-sans text-[0.875rem] font-medium leading-[1.5625rem] text-[rgba(58,58,58,0.70)]"
+            >
               Choose a Wallet Sign-In Method
-            </p>
+            </h2>
 
             <button
               type="button"
               className="inline-flex justify-center items-center gap-[0.625rem] shrink-0 rounded border border-[#D9D9D9]
               text-center font-sans text-[0.75rem] font-normal leading-[1.5625rem] text-[rgba(58,58,58,0.70)]
-              w-[2.3125rem] h-[2.1875rem] p-[0.625rem]"
+              w-[2.3125rem] h-[2.1875rem] p-[0.625rem] focus:outline-none focus:ring-2 focus:ring-primaryColor"
               onClick={handleClose}
+              aria-label="Close wallet options"
             >
               X
             </button>
@@ -43,10 +72,12 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
           
           <div className="flex flex-col gap-y-2 mt-[14px]">
             <button
-              className="bg-[#F7F5F9] rounded-lg px-4 py-[21px] flex items-center gap-x-2 text-base font-medium cursor-pointer"
+              ref={firstButtonRef}
+              className="bg-[#F7F5F9] rounded-lg px-4 py-[21px] flex items-center gap-x-2 text-base font-medium cursor-pointer hover:bg-[#EFEAF3] transition-colors focus:outline-none focus:ring-2 focus:ring-primaryColor focus:ring-offset-2"
               onClick={handleInvisibleSDK}
+              aria-label="Connect with Invisible SDK"
             >
-              <div className="w-10 h-10 flex justify-center items-center rounded-full bg-white">
+              <div className="w-10 h-10 flex justify-center items-center rounded-full bg-white" aria-hidden="true">
                 <svg 
                   width="24" 
                   height="24" 
@@ -61,10 +92,11 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
             </button>
             
             <button
-              className="bg-[#F7F5F9] rounded-lg px-4 py-[21px] flex items-center gap-x-2 text-base font-medium cursor-pointer"
+              className="bg-[#F7F5F9] rounded-lg px-4 py-[21px] flex items-center gap-x-2 text-base font-medium cursor-pointer hover:bg-[#EFEAF3] transition-colors focus:outline-none focus:ring-2 focus:ring-primaryColor focus:ring-offset-2"
               onClick={handleCartridgeController}
+              aria-label="Connect with Cartridge Controller"
             >
-              <div className="w-10 h-10 flex justify-center items-center rounded-full bg-white">
+              <div className="w-10 h-10 flex justify-center items-center rounded-full bg-white" aria-hidden="true">
                 <svg 
                   width="24" 
                   height="24" 
