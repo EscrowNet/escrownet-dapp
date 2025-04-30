@@ -1,0 +1,6 @@
+# Allow all web crawlers
+User-agent: *
+Allow: /
+
+# Specify sitemap location (create one when site goes live)
+# Sitemap: https://escrownet.com/sitemap.xml
