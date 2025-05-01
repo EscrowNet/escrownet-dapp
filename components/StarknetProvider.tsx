@@ -8,7 +8,7 @@ import {
 import ControllerConnector from "@cartridge/connector/controller";
 
 // Define your contract addresses
-const ETH_TOKEN_ADDRESS =
+const ETH_TOKEN_ADDRESS: `0x${string}` =
   "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7";
 
 // Define session policies type inline
@@ -28,8 +28,9 @@ const policies = {
 };
 
 // Define custom chain objects with rpcUrl and rpcUrls properties
+
 const mainnet = {
-  id: BigInt(1),
+  id: BigInt(1), // Revert to BigInt
   network: "mainnet",
   name: "Starknet",
   nativeCurrency: {
@@ -43,6 +44,9 @@ const mainnet = {
     default: {
       http: ["https://api.cartridge.gg/x/starknet/mainnet"],
     },
+    public: {
+      http: ["https://api.cartridge.gg/x/starknet/mainnet"],
+    },
   },
   testnet: false,
   blockExplorers: {
@@ -51,7 +55,7 @@ const mainnet = {
 };
 
 const sepolia = {
-  id: BigInt(2),
+  id: BigInt(2), // Revert to BigInt
   network: "sepolia",
   name: "Starknet Sepolia Testnet",
   nativeCurrency: {
@@ -65,6 +69,9 @@ const sepolia = {
     default: {
       http: ["https://api.cartridge.gg/x/starknet/sepolia"],
     },
+    public: {
+      http: ["https://api.cartridge.gg/x/starknet/sepolia"],
+    },
   },
   testnet: true,
   blockExplorers: {
@@ -76,6 +83,7 @@ const sepolia = {
 const connector = new ControllerConnector({
   policies,
   chains: [mainnet, sepolia],
+  defaultChainId: sepolia.id.toString(), // Convert to string
 });
 
 // Configure RPC provider
