@@ -30,7 +30,7 @@ const policies = {
 // Define custom chain objects with rpcUrl and rpcUrls properties
 
 const mainnet = {
-  id: BigInt(1), // Revert to BigInt
+  id: BigInt(1), 
   network: "mainnet",
   name: "Starknet",
   nativeCurrency: {
@@ -55,7 +55,7 @@ const mainnet = {
 };
 
 const sepolia = {
-  id: BigInt(2), // Revert to BigInt
+  id: BigInt(2),
   network: "sepolia",
   name: "Starknet Sepolia Testnet",
   nativeCurrency: {
@@ -83,7 +83,7 @@ const sepolia = {
 const connector = new ControllerConnector({
   policies,
   chains: [mainnet, sepolia],
-  defaultChainId: sepolia.id.toString(), // Convert to string
+  defaultChainId: sepolia.id.toString(), 
 });
 
 // Configure RPC provider
