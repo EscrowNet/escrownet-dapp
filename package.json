@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@argent/invisible-sdk": "^1.0.0",
     "@radix-ui/react-slot": "^1.1.2",
     "@starknet-react/chains": "^3.0.0",
     "@starknet-react/core": "^3.6.0",

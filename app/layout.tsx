@@ -1,6 +1,8 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { StarknetProvider } from "@/components/StarknetProvider";
+import {WalletProvider} from "../context/WalletContext.tsx"
 
 export const metadata: Metadata = {
   title: "Escrownet | Secure Escrow Services on Starknet",
@@ -39,14 +41,17 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="antialiased min-h-screen">
+       <WalletProvider>
         <StarknetProvider>
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-white focus:z-50 focus:text-black">
             Skip to main content
           </a>
+          
           <div id="main-content">
             {children}
           </div>
         </StarknetProvider>
+        </WalletProvider>
       </body>
     </html>
   );
