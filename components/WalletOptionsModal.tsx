@@ -1,39 +1,48 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import LockBodyScroll from "./LockBodyScroll";
+import { useConnect } from "@starknet-react/core";
 
 function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
-  // Create a ref for the first focusable element
   const firstButtonRef = useRef<HTMLButtonElement>(null);
-  
-  // Focus trap and keyboard navigation
+  const { connect, connectors } = useConnect();
+
   useEffect(() => {
-    // Focus the first button when modal opens
     if (firstButtonRef.current) {
       firstButtonRef.current.focus();
     }
-    
-    // Listen for ESC key event dispatched by LockBodyScroll
+
     const handleEscKeyEvent = () => {
       handleClose();
     };
-    
+
     document.addEventListener("escrownet:escapePressed", handleEscKeyEvent);
-    
+
     return () => {
       document.removeEventListener("escrownet:escapePressed", handleEscKeyEvent);
     };
   }, [handleClose]);
-  
-  // Handlers for wallet selection (just logging for now as per requirements)
+
   const handleInvisibleSDK = () => {
     console.log("Invisible SDK selected");
     handleClose();
   };
 
-  const handleCartridgeController = () => {
-    console.log("Cartridge Controller selected");
-    handleClose();
+  const handleCartridgeController = async () => {
+    const controller = connectors.find(
+      (c) => c.constructor.name === "ControllerConnector"
+    );
+    if (!controller) {
+      console.error("Cartridge Controller connector not found");
+      return;
+    }
+    try {
+      await connect({ connector: controller });
+      console.log("Cartridge Controller connected");
+      handleClose();
+    } catch (error) {
+      console.error("Failed to connect Cartridge Controller:", error);
+    }
   };
 
   return (
@@ -51,8 +60,8 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between pb-2 border-b-2 border-[#C4C4C4]">
-            <h2 
-              id="wallet-options-title" 
+            <h2
+              id="wallet-options-title"
               className="text-center font-sans text-[0.875rem] font-medium leading-[1.5625rem] text-[rgba(58,58,58,0.70)]"
             >
               Choose a Wallet Sign-In Method
@@ -69,7 +78,7 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
               X
             </button>
           </div>
-          
+
           <div className="flex flex-col gap-y-2 mt-[14px]">
             <button
               ref={firstButtonRef}
@@ -77,35 +86,60 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
               onClick={handleInvisibleSDK}
               aria-label="Connect with Invisible SDK"
             >
-              <div className="w-10 h-10 flex justify-center items-center rounded-full bg-white" aria-hidden="true">
-                <svg 
-                  width="24" 
-                  height="24" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
+              <div
+                className="w-10 h-10 flex justify-center items-center rounded-full bg-white"
+                aria-hidden="true"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path d="M12 2L4 6V12C4 15.31 7.58 19.85 12 22C16.42 19.85 20 15.31 20 12V6L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path
+                    d="M12 2L4 6V12C4 15.31 7.58 19.85 12 22C16.42 19.85 20 15.31 20 12V6L12 2Z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
               Use Invisible SDK
             </button>
-            
+
             <button
               className="bg-[#F7F5F9] rounded-lg px-4 py-[21px] flex items-center gap-x-2 text-base font-medium cursor-pointer hover:bg-[#EFEAF3] transition-colors focus:outline-none focus:ring-2 focus:ring-primaryColor focus:ring-offset-2"
               onClick={handleCartridgeController}
               aria-label="Connect with Cartridge Controller"
             >
-              <div className="w-10 h-10 flex justify-center items-center rounded-full bg-white" aria-hidden="true">
-                <svg 
-                  width="24" 
-                  height="24" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
+              <div
+                className="w-10 h-10 flex justify-center items-center rounded-full bg-white"
+                aria-hidden="true"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M9 11H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <rect
+                    x="4"
+                    y="6"
+                    width="16"
+                    height="12"
+                    rx="2"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M9 11H15"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </div>
               Use Cartridge Controller
@@ -117,4 +151,4 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
   );
 }
 
-export default WalletOptionsModal; 
+export default WalletOptionsModal;
