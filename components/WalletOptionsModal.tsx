@@ -1,9 +1,14 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import LockBodyScroll from "./LockBodyScroll";
-import { useConnect } from "@starknet-react/core";
+import { useWallet } from "@/context/WalletContext";
 
 function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
+  // Get wallet functionality from context
+  const { connect, isConnecting, isInitialized, error } = useWallet();
+  
+  // Create a ref for the first focusable element
+
   const firstButtonRef = useRef<HTMLButtonElement>(null);
   const { connect, connectors } = useConnect();
 
@@ -11,7 +16,6 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
     if (firstButtonRef.current) {
       firstButtonRef.current.focus();
     }
-
     const handleEscKeyEvent = () => {
       handleClose();
     };
@@ -22,6 +26,28 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
       document.removeEventListener("escrownet:escapePressed", handleEscKeyEvent);
     };
   }, [handleClose]);
+
+  
+  // Handler for Invisible SDK (Argent) connection
+  const handleInvisibleSDK = async () => {
+    if (!isInitialized) {
+      console.log("Argent Invisible SDK not initialized yet. Please wait...");
+      return;
+    }
+    
+    try {
+      await connect();
+      console.log("Connected with Invisible SDK (Argent)");
+      handleClose();
+    } catch (err) {
+      console.error("Failed to connect with Invisible SDK:", err);
+      // Error handling is done in the hook
+    }
+  };
+  
+  const handleCartridgeController = () => {
+    console.log("Cartridge Controller selected");
+    handleClose();
 
   const handleInvisibleSDK = () => {
     console.log("Invisible SDK selected");
@@ -44,7 +70,7 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
       console.error("Failed to connect Cartridge Controller:", error);
     }
   };
-
+  
   return (
     <>
       <LockBodyScroll lock={true} />
@@ -66,7 +92,6 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
             >
               Choose a Wallet Sign-In Method
             </h2>
-
             <button
               type="button"
               className="inline-flex justify-center items-center gap-[0.625rem] shrink-0 rounded border border-[#D9D9D9]
@@ -79,11 +104,26 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
             </button>
           </div>
 
+          
+          {!isInitialized && (
+            <div className="mt-2 p-2 bg-yellow-100 text-yellow-700 rounded-md text-sm">
+              Initializing wallet connection... Please wait.
+            </div>
+          )}
+          
+          {error && (
+            <div className="mt-2 p-2 bg-red-100 text-red-700 rounded-md text-sm">
+              {error.message}
+            </div>
+          )}
+          
+
           <div className="flex flex-col gap-y-2 mt-[14px]">
             <button
               ref={firstButtonRef}
-              className="bg-[#F7F5F9] rounded-lg px-4 py-[21px] flex items-center gap-x-2 text-base font-medium cursor-pointer hover:bg-[#EFEAF3] transition-colors focus:outline-none focus:ring-2 focus:ring-primaryColor focus:ring-offset-2"
+              className="bg-[#F7F5F9] rounded-lg px-4 py-[21px] flex items-center gap-x-2 text-base font-medium cursor-pointer hover:bg-[#EFEAF3] transition-colors focus:outline-none focus:ring-2 focus:ring-primaryColor focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={handleInvisibleSDK}
+              disabled={isConnecting || !isInitialized}
               aria-label="Connect with Invisible SDK"
             >
               <div
@@ -106,7 +146,7 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
                   />
                 </svg>
               </div>
-              Use Invisible SDK
+              {isConnecting ? "Connecting..." : isInitialized ? "Use Argent Wallet" : "Initializing..."}
             </button>
 
             <button
@@ -151,4 +191,7 @@ function WalletOptionsModal({ handleClose }: { handleClose: () => void }) {
   );
 }
 
+
 export default WalletOptionsModal;
+
+
