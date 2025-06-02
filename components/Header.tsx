@@ -79,9 +79,12 @@ const Header = () => {
         </nav>
       </div>
 
-      {/* Mobile Menu Button */}
+      {/* Right side - Desktop: Theme toggle + Launch App, Mobile: Theme toggle + Menu button */}
       <div className="flex items-center gap-4">
+        {/* Theme toggle - always visible */}
         <ThemeToggle />
+
+        {/* Mobile Menu Button - only on mobile */}
         <motion.button
           whileTap={{ scale: 0.9 }}
           className="block md:hidden text-gray-700 dark:text-dark-text-primary focus:outline-none z-50"
@@ -109,6 +112,17 @@ const Header = () => {
               }}
             />
           </svg>
+        </motion.button>
+
+        {/* Launch App Button - only on desktop */}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="hidden md:block bg-primaryColor dark:bg-dark-accent text-white dark:text-dark-bg px-[46px] py-3 lg:py-[14px] rounded hover:bg-[#64537B] dark:hover:bg-dark-purple-light transition-all duration-300 ease-in-out text-base leading-[25px] font-semibold"
+          onClick={() => router.push("/dashboard")}
+          aria-label="Launch Dashboard App"
+        >
+          Launch App
         </motion.button>
       </div>
 
@@ -142,19 +156,23 @@ const Header = () => {
                 </motion.li>
               ))}
             </ul>
+
+            {/* Launch App button in mobile menu */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full mt-6 bg-primaryColor dark:bg-dark-accent text-white dark:text-dark-bg px-6 py-3 rounded hover:bg-[#64537B] dark:hover:bg-dark-purple-light transition-all duration-300 ease-in-out text-base leading-[25px] font-semibold"
+              onClick={() => {
+                setMenuOpen(false);
+                router.push("/dashboard");
+              }}
+              aria-label="Launch Dashboard App"
+            >
+              Launch App
+            </motion.button>
           </motion.nav>
         )}
       </AnimatePresence>
-
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="hidden md:block bg-primaryColor dark:bg-dark-accent text-white dark:text-dark-bg px-[46px] py-3 lg:py-[14px] rounded hover:bg-[#64537B] dark:hover:bg-dark-purple-light transition-all duration-300 ease-in-out text-base leading-[25px] font-semibold"
-        onClick={() => router.push("/dashboard")}
-        aria-label="Launch Dashboard App"
-      >
-        Launch App
-      </motion.button>
     </header>
   );
 };
