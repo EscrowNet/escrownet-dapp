@@ -22,15 +22,14 @@ export function CompanyHeader({ name, location, logo, amount, milestone }: Compa
           />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
-          <p className="text-[#958F8F] text-sm ">{location}</p>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-text-primary">{name}</h3>
+          <p className="text-[#958F8F] dark:text-dark-text-muted text-sm">{location}</p>
         </div>
       </div>
       <div className="text-right">
-        <p className="text-base font-extrabold text-purple-900">${amount.toLocaleString()}</p>
-        <p className="text-[#958F8F] text-sm font-semibold">{milestone}</p>
+        <p className="text-base font-extrabold text-purple-900 dark:text-dark-accent">${amount.toLocaleString()}</p>
+        <p className="text-[#958F8F] dark:text-dark-text-muted text-sm font-semibold">{milestone}</p>
       </div>
     </div>
   )
 }
-

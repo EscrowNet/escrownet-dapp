@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import WalletOptionsModal from "./WalletOptionsModal";
 
@@ -9,11 +9,13 @@ function ConnectButton() {
     <>
       {connectModalIsOpen &&
         createPortal(
-          <WalletOptionsModal handleClose={() => setConnectModalIsOpen(false)} />,
+          <WalletOptionsModal
+            handleClose={() => setConnectModalIsOpen(false)}
+          />,
           document.body
         )}
       <button
-        className="bg-primaryColor text-[#ffffff] font-bold py-2 px-4 rounded-[4px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primaryColor hover:bg-opacity-90 transition-colors"
+        className="bg-primaryColor dark:bg-dark-accent text-[#ffffff] dark:text-dark-bg font-bold py-2 px-4 rounded-[4px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primaryColor dark:focus:ring-dark-accent dark:focus:ring-offset-dark-bg hover:bg-opacity-90 dark:hover:bg-dark-accent/90 transition-colors duration-200"
         onClick={() => {
           setConnectModalIsOpen(true);
         }}

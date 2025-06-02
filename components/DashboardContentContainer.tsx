@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 interface Props {
   title: string;
@@ -15,13 +15,17 @@ export default function DashboardContentContainer({
 }: Props) {
   return (
     <div
-      className={`${className} bg-white p-[1.6rem] rounded-md text-black  border-[#C4C4C4] border-[0.5px]`}
+      className={`${className} bg-white dark:bg-dark-surface p-[1.6rem] rounded-md text-black dark:text-dark-text-primary border-[#C4C4C4] dark:border-dark-border border-[0.5px] transition-colors duration-300`}
     >
       <div className="w-full flex items-center justify-between mb-2">
-        <p className="font-semibold text-base">{title}</p>
-        <p className="text-[#958f8f] text-base font-normal">{subTitle}</p>
+        <p className="font-semibold text-base text-gray-900 dark:text-dark-text-primary">
+          {title}
+        </p>
+        <p className="text-[#958f8f] dark:text-dark-text-muted text-base font-normal">
+          {subTitle}
+        </p>
       </div>
-      <div className="w-full h-[0.5px] bg-[#C4C4C4] my-4" />
+      <div className="w-full h-[0.5px] bg-[#C4C4C4] dark:bg-dark-border my-4" />
       {!subTitle && (
         <div className="w-full flex flex-col gap-y-5">{children}</div>
       )}

@@ -4,6 +4,94 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #2d0561;
+  --primary-foreground: #ffffff;
+  --secondary: #64537b;
+  --secondary-foreground: #ffffff;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f5f5f5;
+  --accent-foreground: #171717;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #2d0561;
+}
+
+.dark {
+  --background: #0f0a1a;
+  --foreground: #e8e3f0;
+  --card: #241832;
+  --card-foreground: #e8e3f0;
+  --popover: #1a1025;
+  --popover-foreground: #e8e3f0;
+  --primary: #9d7bea;
+  --primary-foreground: #0f0a1a;
+  --secondary: #8b6fbf;
+  --secondary-foreground: #0f0a1a;
+  --muted: #1a1025;
+  --muted-foreground: #b8a8cc;
+  --accent: #6b4c9a;
+  --accent-foreground: #e8e3f0;
+  --border: #3d2b4f;
+  --input: #3d2b4f;
+  --ring: #9d7bea;
+}
+
 body {
   position: relative;
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background-color: #1a1025;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #3d2b4f;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4c9a;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Disable transitions on page load */
+.no-transitions * {
+  transition: none !important;
+}
+
+/* Prevent content shift when scrollbar appears/disappears in dark mode */
+html.dark {
+  scrollbar-gutter: stable;
+}
+
+/* Improve focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Improve image rendering in dark mode */
+.dark img {
+  filter: brightness(0.95) contrast(1.05);
 }
